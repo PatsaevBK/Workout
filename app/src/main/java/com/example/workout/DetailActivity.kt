@@ -9,7 +9,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         val frag = supportFragmentManager.findFragmentById(R.id.detail_frag) as? WorkoutDetailFragment
         frag?.let {
-            it.workoutID = 1
+            it.workoutID = intent.getLongExtra(EXTRA_WORKOUT_ID, -1)
         }
+    }
+
+    companion object {
+        const val EXTRA_WORKOUT_ID = "ID"
     }
 }
