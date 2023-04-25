@@ -30,6 +30,9 @@ class WorkoutDetailFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        savedInstanceState?.let {
+            workoutID = it.getLong("workoutID")
+        }
     }
 
     override fun onCreateView(
@@ -45,10 +48,15 @@ class WorkoutDetailFragment : Fragment() {
         view?.let {
             val title = it.findViewById<TextView>(R.id.textTitle)
             val description = it.findViewById<TextView>(R.id.textDescription)
-            val workout = Workout.workouts[workoutID!!.toInt()]
+            val workout = Workout.workouts[workoutID?.toInt() ?: 0]
             title.text = workout.name
             description.text = workout.description
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putLong("workoutID", workoutID ?: 0)
     }
 
     companion object {
