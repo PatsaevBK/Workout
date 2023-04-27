@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,9 +31,17 @@ class WorkoutDetailFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        savedInstanceState?.let {
-            workoutID = it.getLong("workoutID")
-        }
+        /*if (savedInstanceState == null) {
+            val stopwatch: StopwatchFragment = StopwatchFragment()
+            val ft: FragmentTransaction = childFragmentManager.beginTransaction()
+            ft.apply {
+                add(R.id.stopwatchContainer, stopwatch)
+                addToBackStack(null)
+                setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                commit()
+            }
+        } else workoutID = savedInstanceState.getLong("workoutID")*/
+        savedInstanceState?.let { workoutID = it.getLong("workoutID") }
     }
 
     override fun onCreateView(
